@@ -21,11 +21,15 @@ import com.google.maps.android.clustering.ClusterItem;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 public class MyItem implements ClusterItem {
     private final LatLng mPosition;
     private String mTitle;
     private String mSnippet;
     private Float zIndex;
+
+    private int type = 0;
 
     public MyItem(double lat, double lng) {
         mPosition = new LatLng(lat, lng);
@@ -78,5 +82,26 @@ public class MyItem implements ClusterItem {
      */
     public void setZIndex(Float zIndex) {
         this.zIndex = zIndex;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyItem myItem = (MyItem) o;
+        return mPosition.equals(myItem.mPosition);
+    }
+
+    @Override
+    public int hashCode() {
+        return mPosition.hashCode();
     }
 }
